@@ -1,11 +1,12 @@
 import math 
 import numpy as np
 
-def make_quotes(mid, half_spread, tick = 0.01):
-    bid = mid - half_spread
-    ask = mid + half_spread
-    bid = round(math.floor(bid/tick)*tick, 2)
-    ask = round(math.ceil(ask/tick)*tick, 2)
+def make_quotes(mid, half_spread, tick = 0.01, inventory=0, skew=0.0):
+    center = mid - skew * inventory
+    bid = center - half_spread
+    ask = center + half_spread
+    bid = round(math.floor(round(bid / tick, 6)) * tick, 2)
+    ask = round(math.ceil(round(ask / tick, 6)) * tick, 2)
     return bid, ask
 
 def fill_probability(delta, A, k, dt):
