@@ -15,8 +15,13 @@ The `sqrt(dt)` is there because variance grows linearly with time, so the standa
 **Quotes.** The market maker quotes around a centre that shifts with inventory:
 
 `center = mid - skew * inventory`
+
 `bid = center - half_spread`, rounded down to the tick
+
 `ask = center + half_spread`, rounded up to the tick
+
+Rounding needs care because of floating point: `99.07 - 0.03` comes out as `99.03999999999999`, so dividing by the tick and flooring would give a bid of 99.03 instead of 99.04. I round the quotient to 6 decimals before `floor`/`ceil` to avoid this.
+
 
 When long, the centre moves down, so the ask becomes more attractive to buyers and the bid less attractive to sellers. This pushes inventory back towards zero.
 
