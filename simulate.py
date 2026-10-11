@@ -31,4 +31,4 @@ if __name__ == "__main__":
     inv,cash, pnl = run_simulation(path, 0.05, 20, 10, 0.01, 7, 0.01)
     print(inv[-1], cash[-1], pnl[-1])
     print(pnl[-1], cash[-1] + inv[-1] * path[-1])
-    print(make_quotes(100.0, 0.05, inventory=5, skew=0.1))
+   
